@@ -345,7 +345,7 @@ public class TimeTable {
             int rem = (no_of_lectures - counter_class);
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if((b==yStored[0] && b==yStored[1]) || (b==yStored[0] && b==yStored[2])|| (b==yStored[0] && b==yStored[3]) || (b==yStored[0] && b==yStored[4]) ||(b==yStored[1] && b==yStored[2]) ||(b==yStored[1] && b==yStored[3]) ||(b==yStored[1] && b==yStored[4])||(b==yStored[2] && b==yStored[3]) ||(b==yStored[2] && b==yStored[4]) ||(b==yStored[3] && b==yStored[4])) {
+                    if((b==yStored[0] && b==yStored[1]) || (b==yStored[0] && b==yStored[2])|| (b==yStored[0] && b==yStored[3]) || (b==yStored[0] && b==yStored[4]) || (b==yStored[0] && b==yStored[5])||(b==yStored[1] && b==yStored[2]) ||(b==yStored[1] && b==yStored[3]) ||(b==yStored[1] && b==yStored[4])||(b==yStored[1] && b==yStored[5])||(b==yStored[2] && b==yStored[3]) ||(b==yStored[2] && b==yStored[4]) ||(b==yStored[2] && b==yStored[5]) ||(b==yStored[3] && b==yStored[4])||(b==yStored[3] && b==yStored[5])) {
                         continue;
                     }
                     if(batches[batchID].timetable[a][b]==null) {
@@ -427,7 +427,7 @@ public class TimeTable {
                 int rem = (no_of_lectures - counter) / 2;
                 for (int a = 0; a < 4; a+=2) {
                     for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                        if(b==yStored[0] || b==yStored[1] || b==yStored[2] || b==yStored[3]) {
+                        if(b==yStored[0]) {
                             continue;
                         }
                         if(batches[batchID].timetable[a][b]==null) {
