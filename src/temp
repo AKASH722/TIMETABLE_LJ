@@ -256,7 +256,7 @@ private static int getCounter2(int courseID, int batchID, int facID, int classID
             }
         }
         return counter;
-    }
+}
 /// {
 
 int count_2=0;
