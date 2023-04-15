@@ -1,6 +1,8 @@
 import java.util.Arrays;
 import java.util.Random;
 public class TimeTable {
+    static int[] dbmsYStored=new int[10];
+    static int ass=0;
     static Random random=new Random();
     static Course[] courses = new Course[50];
     static Faculty[] faculties = new Faculty[50];
@@ -38,6 +40,7 @@ public class TimeTable {
         faculties[facID].faculty_timetable[a+1][b] = batches[batchID].batchName;
         lab[labId].lab_timetable[a+1][b] = batches[batchID].batchName;
         batches[batchID].timetable[a + 1][b] = batches[batchID].course[courseID] + " [" + faculties[facID].facultyName + "]" + "{"+lab[labId].labName+"}";
+        dbmsYStored[ass++]=b;
         return false;
     }
     static void checkLab(int batchID, int facID, int[] x, int[] y, int labId, int[] pos) {
@@ -60,22 +63,38 @@ public class TimeTable {
         }
         generatePosition(x, y, pos);
     }
-    static void assignDifferentLab(int courseID, int batchID, int facID, int[] x, int[] y, int[] pos, int labId, int no_of_lectures) {
-        int remLabID=0;
+    static  void generateDS_JAVA() {
+        for(int batchID=0 ;batchID<12;batchID++) {
+            for(int courseID=0;courseID<2;courseID++) {
+                if (courseID == 0 && batchID == 9) {
+                    continue;
+                }
+                int facID = batches[batchID].faculty[courseID];
+                int[] x = new int[12];
+                int[] y = new int[12];
+                Arrays.fill(x, 401);
+                int[] pos = new int[12];
+                int no_of_lectures = 6;
+                ass=0;
+                assignDifferentLab(courseID, batchID, facID, x, y, pos, no_of_lectures);
+            }
+        }
+    }
+    static void assignDifferentLab(int courseID, int batchID, int facID, int[] x, int[] y, int[] pos, int no_of_lectures) {
+        int labID=0;
         int counter = 0;
-        counter = getCounter(courseID, batchID, facID, labId, counter);
         do {
             if(counter==no_of_lectures) {
                 break;
             }
             int rem = (no_of_lectures - counter) / 2;
-            checkLab(batchID, facID, x, y, remLabID, pos);
+            checkLab(batchID, facID, x, y, labID, pos);
             for (int d = 0; d < rem; d++) {
-                if (assignLab(courseID, batchID, facID, remLabID, pos)) break;
+                if (assignLab(courseID, batchID, facID, labID, pos)) break;
             }
-            counter = getCounter(courseID, batchID, facID, remLabID, counter);
-            remLabID++;
-        } while(remLabID<9);
+            counter = getCounter(courseID, batchID, facID, labID, counter);
+            labID++;
+        } while(labID<9);
     }
     private static int getCounter(int courseID, int batchID, int facID, int labId, int counter) {
         for (int a = 0; a < batches[batchID].timetable.length; a++) {
@@ -193,48 +212,10 @@ public class TimeTable {
     static void checkClassroom(int batchID, int[] x, int[] y, int[] pos, int facID, int classID) {
         for (int a = 0; a < 4; a+=2) {
             for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                if(batches[batchID].timetable[a][b]==null) {
-                    if(faculties[facID].faculty_timetable[a][b]==null) {
-                        if(classrooms[classID].class_timetable[a][b]==null) {
-                            for (int c = 0; c < x.length; c++) {
-                                if(x[c] == 401) {
-                                    x[c] = a;
-                                    y[c] = b;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
+                findingPos(batchID, x, y, facID, classID, a, b);
             }
         }
         generatePosition(x, y, pos);
-    }
-    static  void generateDS_JAVA() {
-        for(int courseID=0 ;courseID<2;courseID++) {
-            for(int batchID=0 ;batchID<12;batchID++) {
-                if (courseID == 0 && batchID == 9) {
-                    continue;
-                }
-                int facID = batches[batchID].faculty[courseID];
-                int[] x = new int[12];
-                int[] y = new int[12];
-                Arrays.fill(x, 401);
-                int labId;
-                int[] pos = new int[12];
-                if (batchID < 6) {
-                    labId = batchID;
-                } else {
-                    labId = batchID - 6;
-                }
-                checkLab(batchID, facID, x, y, labId, pos);
-                for (int d = 0; d < 3; d++) {
-                    if (assignLab(courseID, batchID, facID, labId, pos)) break;
-                }
-                int no_of_lectures=6;
-                assignDifferentLab(courseID, batchID, facID, x, y, pos, labId, no_of_lectures);
-            }
-        }
     }
     static void generateFEE() {
         int courseID=4;
@@ -245,76 +226,50 @@ public class TimeTable {
             int[] pos =new int[12];
             int facID=batches[batchID].faculty[courseID];
             Arrays.fill(x,401);
-            int classID;
-            int labId;
-            if(batchID<6) {
-                classID=batchID;
-                labId=0;
+            int no_of_lectures=4;
+            int counter=0;
+            int classID=0;
+            int skip;
+            if(batchID < 6) {
+                skip=batchID;
             } else {
-                classID=batchID-6;
-                labId=1;
+                skip=batchID-6;
             }
-            checkClassroom(batchID, x, y, pos, facID, classID);
-            for (int d = 0; d < 2; d++) {
-                if (assignClassRoom(courseID, batchID, storedY, pos, facID, classID, d)) break;
-            }
-            int[] j=new int[6];//y
-            Arrays.fill(j,401);
-            int[] pos_2 =new int[6];
-            int g=4;//x
-            for (int b = 0; b < batches[batchID].timetable[g].length; b++) {
-                if(batches[batchID].timetable[g][b]==null) {
-                    if(faculties[facID].faculty_timetable[g][b]==null) {
-                        if(feeLabs[labId].fee_lab_timetable[g][b]==null) {
-                            for (int c = 0; c < x.length; c++) {
-                                if(j[c] == 401) {
-                                    j[c] = b;
-                                    break;
-                                }
-                            }
+            do {
+                if(counter==no_of_lectures) {
+                    break;
+                }
+                int rem = (no_of_lectures - counter)/2;
+                for (int a = 0; a < 4; a+=2) {
+                    for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
+                        if(b==skip) {
+                            continue;
+                        }
+                        findingPos(batchID, x, y, facID, classID, a, b);
+                    }
+                }
+                generatePosition(x, y, pos);
+                for (int d = 0; d < rem; d++) {
+                    if (assignClassRoom(courseID, batchID, storedY, pos, facID, classID, d)) break;
+
+                }
+                counter = getCounter2(courseID, batchID, facID, classID, counter);
+                classID++;
+            } while(classID<7);
+        }
+    }
+    public static void findingPos(int batchID, int[] x, int[] y, int facID, int classID, int a, int b) {
+        if(batches[batchID].timetable[a][b]==null) {
+            if(faculties[facID].faculty_timetable[a][b]==null) {
+                if(classrooms[classID].class_timetable[a][b]==null) {
+                    for (int c = 0; c < x.length; c++) {
+                        if(x[c] == 401) {
+                            x[c] = a;
+                            y[c] = b;
+                            break;
                         }
                     }
                 }
-            }
-            for(int o=0;o<6;o++) {
-                int temp=j[o];
-                temp%=10;
-                for(int q=0;q<2;q++) {
-                    if(temp==storedY[q]) {
-                        j[o]=401;
-                        break;
-                    }
-                }
-            }
-            for (int m = 0; m < 6; m++) {
-                if(j[m]!=401) {
-                    pos_2[m]=g*10+j[m];
-                }
-                if(j[m]==401) {
-                    pos_2[m]=401;
-                }
-            }
-            for (int d = 0; d < 1; d++) {
-                int count=0;
-                for(int p:pos_2) {
-                    if(p==401) {
-                        count++;
-                    }
-                }
-                if(count==6) {
-                    break;
-                }
-                int pos2;
-                do {
-                    pos2 = random.nextInt(6);
-                } while (pos_2[pos2] == 401);
-                int temp=pos_2[pos2];
-                int b = temp%10;
-                int a = temp/10;
-                pos[pos2]=401;
-                faculties[facID].faculty_timetable[a][b] = batches[batchID].batchName;
-                feeLabs[labId].fee_lab_timetable[a][b] = batches[batchID].batchName;
-                batches[batchID].timetable[a][b] = batches[batchID].course[courseID] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
             }
         }
     }
@@ -326,28 +281,15 @@ public class TimeTable {
             int[] storedY=new int[2];
             int[] pos =new int[12];
             Arrays.fill(x,401);
-            int classID;
-            if(batchID<6) {
-                classID=batchID;
-            } else {
-                classID=batchID-6;
-            }
+            int classID=0;
             int facID=batches[batchID].faculty[courseID];
-            checkClassroom(batchID, x, y, pos, facID, classID);
             int[] pos_2 =new int[6];
-            for (int d = 0; d < 2; d++) {
-                if (assignClassRoom(courseID, batchID, storedY, pos, facID, classID, d)) break;
-            }
             int no_of_lectures=4;
-            assignExtraClass2(courseID, batchID, x, y, facID, pos, storedY, classID, no_of_lectures);
+            assignExtraClass2(courseID, batchID, x, y, facID, pos, storedY, no_of_lectures);
             int[] j=new int[6];//y
             Arrays.fill(j,401);
             int g=4;//x
-            checkClassroom5th(batchID, x, storedY, facID, classID, g, j, pos_2);
-            for (int d = 0; d < 2; d++) {
-                if (assignClassroom5th(courseID, batchID, pos, classID, facID, pos_2)) break;
-            }
-            no_of_lectures=6;
+            no_of_lectures=2;
             assignExtraClass5(courseID, batchID, x, storedY, pos, classID, facID, pos_2, no_of_lectures, j, g);
         }
     }
@@ -368,9 +310,8 @@ public class TimeTable {
             }
             counter = getCounter2(courseID, batchID, facID, remClassId, counter);
             remClassId++;
-        } while(remClassId<7);
+        } while(remClassId<6);
     }
-
     static void generateDBMS() {
         int courseID=2;
         for(int batchID=0 ;batchID<12;batchID++) {
@@ -379,18 +320,9 @@ public class TimeTable {
             int[] y=new int[12];
             int[] pos =new int[12];
             Arrays.fill(x,401);
-            int labId;
-            if(batchID<6) {
-                labId=6;
-            } else {
-                labId=7;
-            }
-            checkLab(batchID, facID, x, y, labId, pos);
-            for (int d = 0; d < 1; d++) {
-                if (assignLab(courseID, batchID, facID, labId, pos)) break;
-            }
             int no_of_lectures=2;
-            assignDifferentLab(courseID, batchID, facID, x, y, pos, labId, no_of_lectures);
+            ass=0;
+            assignDifferentLab(courseID, batchID, facID, x, y, pos, no_of_lectures);
         }
         for(int batchID=0 ;batchID<12;batchID++) {
             int[] x=new int[12];
@@ -399,47 +331,53 @@ public class TimeTable {
             int[] pos =new int[12];
             int[] storedY=new int[2];
             Arrays.fill(x,401);
-            int classID;
-            if(batchID<6) {
-                classID=batchID;
-            } else {
-                classID=batchID-6;
-            }
-            checkClassroom(batchID, x, y, pos, facID, classID);
-            for (int d = 0; d < 1; d++) {
-                if (assignClassRoom(courseID, batchID, storedY, pos, facID, classID, d)) break;
-            }
+           // int classID=0;
             int no_of_lectures=2;
-            assignExtraClass2(courseID, batchID, x, y, facID, pos, storedY, classID, no_of_lectures);
+            int counter=0;
+            int classID=0;
+            do {
+                if(counter==no_of_lectures) {
+                    break;
+                }
+                int rem = (no_of_lectures - counter)/2;
+                for (int a = 0; a < 4; a+=2) {
+                    for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
+                        if(b==dbmsYStored[1]) {
+                            continue;
+                        }
+                        findingPos(batchID, x, y, facID, classID, a, b);
+                    }
+                }
+                generatePosition(x, y, pos);
+                for (int d = 0; d < rem; d++) {
+                    if (assignClassRoom(courseID, batchID, storedY, pos, facID, classID, d)) break;
+                }
+                counter = getCounter2(courseID, batchID, facID, classID, counter);
+                classID++;
+            } while(classID<6);
             int g=4;//x
             int[] j=new int[6];//y
             Arrays.fill(j,401);
             int[] pos_2 =new int[6];
-            checkClassroom5th(batchID, x, storedY, facID, classID, g, j, pos_2);
-            for (int d = 0; d < 1; d++) {
-                if (assignClassroom5th(courseID, batchID, pos, classID, facID, pos_2)) break;
-            }
-            no_of_lectures+=1;
+            no_of_lectures=1;
             assignExtraClass5(courseID, batchID, x, storedY, pos, classID, facID, pos_2, no_of_lectures, j, g);
         }
     }
-    private static void assignExtraClass2(int courseID, int batchID, int[] x, int[] y, int facID, int[] pos, int[] storedY, int classID, int no_of_lectures) {
+    private static void assignExtraClass2(int courseID, int batchID, int[] x, int[] y, int facID, int[] pos, int[] storedY, int no_of_lectures) {
         int counter=0;
-        counter = getCounter2(courseID, batchID, facID, classID, counter);
-        int remClassId=0;
+        int classID=0;
         do {
             if(counter==no_of_lectures) {
                 break;
             }
             int rem = (no_of_lectures - counter)/2;
-            checkClassroom(batchID, x, y, pos, facID, remClassId);
+            checkClassroom(batchID, x, y, pos, facID, classID);
             for (int d = 0; d < rem; d++) {
-                if (assignClassRoom(courseID, batchID, storedY, pos, facID, remClassId, d)) break;
-
+                if (assignClassRoom(courseID, batchID, storedY, pos, facID, classID, d)) break;
             }
-            counter = getCounter2(courseID, batchID, facID, remClassId, counter);
-            remClassId++;
-        } while(remClassId<7);
+            counter = getCounter2(courseID, batchID, facID, classID, counter);
+            classID++;
+        } while(classID<6);
     }
     private static int getCounter2(int courseID, int batchID, int facID, int classID, int counter) {
         for (int a = 0; a < batches[batchID].timetable.length; a++) {
@@ -454,7 +392,6 @@ public class TimeTable {
         }
         return counter;
     }
-
     static int count=0;
     static int count_2=0;
     static void displayTimeTAble () {
@@ -603,7 +540,6 @@ public class TimeTable {
         classrooms[3].setClassroom("521  ");
         classrooms[4].setClassroom("524  ");
         classrooms[5].setClassroom("525  ");
-        classrooms[6].setClassroom("EXTRA");
         courses[0].setCourse("DS  ",6, new int[]{0, 1, 2, 3, 4}); //2 2 2
         courses[1].setCourse("JAVA",6, new int[]{5, 6, 7, 8}); // 2 2 2
         courses[2].setCourse("DBMS",5, new int[]{9, 10, 11, 12, 13, 14}); // 2 2 1
@@ -640,6 +576,39 @@ public class TimeTable {
         batches[9].timetable[1][5]=javaB10;
         faculties[4].faculty_timetable[1][5]="B10";
         lab[3].lab_timetable[1][5] = batches[9].batchName;
+        for (int batchID = 0; batchID < 12; batchID++) {
+            int labId;
+            int b;
+            if(batchID < 6) {
+                b=batchID;
+                labId=0;
+            } else {
+                labId=1;
+                b=batchID-6;
+            }
+            int facID;
+            if(batchID==0 || batchID==5 || batchID==11) {
+                facID=20;
+            } else if (batchID==1 || batchID==7) {
+                facID=21;
+            } else if (batchID==2 || batchID==6) {
+                facID=22;
+            } else if (batchID==3 || batchID==9) {
+                facID=23;
+            } else {
+                facID=24;
+            }
+            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
+            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
+            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
+        }
+        //336
+        //initial filled : 18
+        //FEE filled : 48 --> 60
+        //Java Filled : 72
+        //DS Filled : 66 --> 72
+        //Maths Filled : 72
+        //DBMS Filled : 60
         generateDS_JAVA();
         generateFEE();
         generateMaths();
