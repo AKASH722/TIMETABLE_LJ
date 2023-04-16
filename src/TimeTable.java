@@ -105,99 +105,21 @@ public class TimeTable {
         batches[9].timetable[1][5]=javaB10;
         faculties[4].faculty_timetable[1][5]="B10";
         lab[3].lab_timetable[1][5] = batches[9].batchName;
-        {
-            int labId=0;
-            int facID=20;
-            int b=0;
-            int batchID=0;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-            b=1;
-            batchID=5;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-            b=2;
-            batchID=11;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-        }
-        {
-            int labId=0;
-            int facID=21;
-            int b=3;
-            int batchID=1;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-            b=4;
-            batchID=7;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-        }
-        {
-            int labId=0;
-            int facID=22;
-            int b=5;
-            int batchID=2;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-            labId=1;
-            b=0;
-            batchID=6;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-        }
-        {
-            int labId=1;
-            int facID=23;
-            int b=1;
-            int batchID=3;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-            b=2;
-            batchID=9;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-        }
-        {
-            int labId=1;
-            int facID=24;
-            int b=3;
-            int batchID=4;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-            b=4;
-            batchID=10;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-            b=5;
-            batchID=8;
-            faculties[facID].faculty_timetable[4][b] = batches[batchID].batchName;
-            feeLabs[labId].fee_lab_timetable[4][b] = batches[batchID].batchName;
-            batches[batchID].timetable[4][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]"+ "{"+ feeLabs[labId].FEE_labName +"}";
-        }
     }
     static int[][] yStored =new int[12][4];
+    static int[] skip=new int[12];
     public static void main(String[] args) {
         constraint();
         for (int[] ints : yStored) {
             Arrays.fill(ints, 401);
         }
+        Arrays.fill(skip, 401);
         for(int batchID=0 ;batchID<batches.length;batchID++) {
             generateDS_JAVA(0,batchID);
             generateDS_JAVA(1,batchID);
         }
         generateDBMSLab();
+        generateFEELab();
         for(int batchID=0 ;batchID<batches.length;batchID++) {
             generateFEE(batchID);
             generateDBMS(batchID);
@@ -300,32 +222,99 @@ public class TimeTable {
             labId++;
         } while(labId<lab.length);
     }
+    static void generateFEELab() {
+        for (int batchID = 0; batchID < batches.length; batchID++) {
+            int facID=batches[batchID].faculty[4];
+            int no_of_lectures=2;
+            int[] x_class=new int[30];
+            int[] y_class=new int[30];
+            int[] pos_class =new int[30];
+            Arrays.fill(x_class,401);
+            int counter_LAb=0;
+            int labID=0;
+            do {
+                if(counter_LAb==no_of_lectures) {
+                    break;
+                }
+                int rem = (no_of_lectures - counter_LAb)/2;
+                for (int a = 0; a < 4; a+=2) {
+                    for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
+                        if(batches[batchID].timetable[a][b]==null) {
+                            if(faculties[facID].faculty_timetable[a][b]==null) {
+                                if(feeLabs[labID].fee_lab_timetable[a][b]==null) {
+                                    for (int c = 0; c < x_class.length; c++) {
+                                        if(x_class[c] == 401) {
+                                            x_class[c] = a;
+                                            y_class[c] = b;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < pos_class.length; i++) {
+                    if(x_class[i]!=401) {
+                        pos_class[i]=x_class[i]*10+y_class[i];
+                    }
+                    if(x_class[i]==401) {
+                        pos_class[i]=401;
+                    }
+                }
+                for (int d = 0; d < rem; d++) {
+                    int count=0;
+                    for(int p:pos_class) {
+                        if(p==401) {
+                            count++;
+                        }
+                    }
+                    if(count== pos_class.length) {
+                        break;
+                    }
+                    int pos2;
+                    do {
+                        pos2 = random.nextInt(pos_class.length-1);
+                    } while (pos_class[pos2] == 401);
+                    int temp=pos_class[pos2];
+                    int b = temp%10;
+                    int a = temp/10;
+                    pos_class[pos2]=401;
+                    faculties[facID].faculty_timetable[a][b] = batches[batchID].batchName;
+                    feeLabs[labID].fee_lab_timetable[a][b] = batches[batchID].batchName;
+                    batches[batchID].timetable[a][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]" + "{" + feeLabs[labID].FEE_labName + "}";
+                    faculties[facID].faculty_timetable[a+1][b] = batches[batchID].batchName;
+                    feeLabs[labID].fee_lab_timetable[a+1][b] = batches[batchID].batchName;
+                    batches[batchID].timetable[a+1][b] = batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]" + "{" + feeLabs[labID].FEE_labName + "}";
+                    skip[batchID]=b;
+                }
+                for (int a = 0; a < batches[batchID].timetable.length; a++) {
+                    for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
+                        if (batches[batchID].timetable[a][b] == null) {
+                            continue;
+                        }
+                        if (batches[batchID].timetable[a][b].equals(batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]" + "{" + feeLabs[labID].FEE_labName + "}")) {
+                            counter_LAb++;
+                        }
+                    }
+                }
+                labID++;
+                Arrays.fill(x_class,401);
+            } while(labID <feeLabs.length);
+        }
+    }
     static void generateFEE(int batchID) {
-        int facID=batches[batchID].faculty[4];
-        int no_of_lectures=4;
-        int[] yStored =new int[4];
-        Arrays.fill(yStored,401);
-        int yStoredCount=0;
+        int no_of_lectures=3;
         int[] x_class=new int[30];
         int[] y_class=new int[30];
         int[] pos_class =new int[30];
-        Arrays.fill(x_class,401);
+        int[] yStored =new int[3];
         int counter_class=0;
+        int yStoredCount=0;
+        Arrays.fill(yStored,401);
+        Arrays.fill(x_class,401);
         int classID=0;
-        int skip;
-        if(batchID==0 || batchID==6) {
-            skip=0;
-        } else if(batchID==5 || batchID==3) {
-            skip=1;
-        } else if(batchID==11 || batchID==9) {
-            skip=2;
-        } else if(batchID==1 || batchID==4) {
-            skip=3;
-        } else if(batchID==7 || batchID==10) {
-            skip=4;
-        } else {
-            skip=5;
-        }
+        int facID=batches[batchID].faculty[4];
         do {
             if(counter_class==no_of_lectures) {
                 break;
@@ -374,7 +363,7 @@ public class TimeTable {
                 int b = temp%10;
                 int a = temp/10;
                 pos_class[pos2]=401;
-                if(b==skip || (b==yStored[0] && b==yStored[1]) || (b==yStored[0] && b==yStored[2])|| (b==yStored[0] && b==yStored[3]) ||(b==yStored[1] && b==yStored[2]) ||(b==yStored[1] && b==yStored[3]) ||(b==yStored[2] && b==yStored[3])) {
+                if(b==skip[batchID] || (b==yStored[0] && b==yStored[1]) || (b==yStored[0] && b==yStored[2])||(b==yStored[1] && b==yStored[2])) {
                     continue;
                 }
                 faculties[facID].faculty_timetable[a][b] = batches[batchID].batchName;
@@ -397,17 +386,17 @@ public class TimeTable {
         } while(classID<classrooms.length);
     }
     static void generateMaths(int batchID) {
-            int facID=batches[batchID].faculty[3];
-            int no_of_lectures=6;
-            int[] yStored =new int[6];
-            Arrays.fill(yStored,401);
-            int yStoredCount=0;
-            int[] x_class=new int[30];
-            int[] y_class=new int[30];
-            int[] pos_class =new int[30];
-            Arrays.fill(x_class,401);
-            int counter_class=0;
-            int classID=0;
+        int facID=batches[batchID].faculty[3];
+        int no_of_lectures=6;
+        int[] yStored =new int[6];
+        Arrays.fill(yStored,401);
+        int yStoredCount=0;
+        int[] x_class=new int[30];
+        int[] y_class=new int[30];
+        int[] pos_class =new int[30];
+        Arrays.fill(x_class,401);
+        int counter_class=0;
+        int classID=0;
         do {
             if(counter_class==no_of_lectures) {
                 break;
