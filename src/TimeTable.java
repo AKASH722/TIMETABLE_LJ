@@ -755,5 +755,6 @@ public class TimeTable {
         }
         count2*=100;
         System.out.println("Accuracy Of the TimeTable : "+((count2)/336.0)+"%");
+        System.out.println("Accuracy Of the TimeTable : "+((count*100)/12.0)+"%");
     }
 }
