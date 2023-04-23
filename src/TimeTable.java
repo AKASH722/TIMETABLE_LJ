@@ -659,6 +659,7 @@ public class TimeTable {
         }
         System.out.println();
     }
+    static int[] batchCounter =new int[12];
     static void displayTimeTAble () {
         int[] sub_count=new int[5];
         Arrays.fill(sub_count,0);
@@ -703,6 +704,7 @@ public class TimeTable {
                     if(lab1.lab_timetable[i][j]==null) {
                         lab1.lab_timetable[i][j]="--";
                     }
+                    counter(lab1.lab_timetable[i][j]);
                 }
             }
             lab1.display();
@@ -717,6 +719,7 @@ public class TimeTable {
                     if(lab1.fee_lab_timetable[i][j]==null) {
                         lab1.fee_lab_timetable[i][j]="--";
                     }
+                    counter(lab1.fee_lab_timetable[i][j]);
                 }
             }
             lab1.display();
@@ -731,6 +734,7 @@ public class TimeTable {
                     if(c.class_timetable[i][j]==null) {
                         c.class_timetable[i][j]="--";
                     }
+                    counter(c.class_timetable[i][j]);
                 }
             }
             c.display();
@@ -754,7 +758,23 @@ public class TimeTable {
             count2+=x;
         }
         count2*=100;
+        System.out.println();
+        int sum12=0;
+        for(int x:batchCounter) {
+            System.out.println(x);
+            sum12+=x;
+        }
+        System.out.println();
+        System.out.println(336-sum12);
         System.out.println("Accuracy Of the TimeTable : "+((count2)/336.0)+"%");
         System.out.println("Accuracy Of the TimeTable : "+((count*100)/12.0)+"%");
+    }
+    static void counter(String s) {
+        for (int i = 0; i < 12; i++) {
+            String batch="B"+(i+1);
+            if(batch.equals(s)) {
+                batchCounter[i]++;
+            }
+        }
     }
 }
