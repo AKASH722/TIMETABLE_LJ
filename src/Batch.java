@@ -18,9 +18,10 @@ public class Batch extends TimeTable{
     }
     void display() {
         System.out.println(batchName);
+        System.out.println("        MONDAY        |          TUESDAY          |         WEDNESDAY         |          THURSDAY         |           FRIDAY          |          SATURDAY         |");
         for (String[] strings : timetable) {
             for (String string : strings) {
-                System.out.print(string + "          ");
+                System.out.print(string + "     |     ");
             }
             System.out.println();
         }
