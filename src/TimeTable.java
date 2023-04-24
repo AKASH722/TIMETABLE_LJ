@@ -630,7 +630,10 @@ public class TimeTable {
         }
         count2*=100;
         System.out.println();
-        int sum12=0;
+        int sum12=0,sum13=0;
+        for(int x:sub_count) {
+            sum13+=x;
+        }
         for(int x:batchCounter) {
             System.out.println(x);
             sum12+=x;
@@ -639,5 +642,10 @@ public class TimeTable {
         System.out.println(336-sum12);
         System.out.println("Accuracy Of the TimeTable : "+((count2)/336.0)+"%");
         System.out.println("Accuracy Of the TimeTable : "+((count*100)/12.0)+"%");
+        if((336-sum12) == count_2 && count_2 == (336-sum13)) {
+            System.out.println("No overwriting");
+        } else {
+            System.out.println("overwritten");
+        }
     }
 }
