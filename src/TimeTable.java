@@ -64,11 +64,13 @@ public class TimeTable {
         //fee labs
         classes[15].setClassName("526  ");
         classes[16].setClassName("606  ");
+        //Create course
         courses[0].setCourse("DS  ",6, new int[]{0, 1, 2, 3, 4});
         courses[1].setCourse("JAVA",6, new int[]{5, 6, 7, 8});
         courses[2].setCourse("DBMS",5, new int[]{9, 10, 11, 12, 13, 14});
         courses[3].setCourse("MATH",6, new int[]{15, 16, 17, 18, 19});
         courses[4].setCourse("FEE ",5, new int[]{20, 21, 22, 23, 24});
+        //create batches
         batches[0].createBatch("B1",new int[]{0, 1, 2, 3, 4},new int[]{0, 5, 9, 15, 20});
         batches[1].createBatch("B2",new int[]{0, 1, 2, 3, 4},new int[]{1, 6, 10, 16, 21});
         batches[2].createBatch("B3",new int[]{0, 1, 2, 3, 4},new int[]{0, 7, 11, 17, 22});
@@ -81,6 +83,7 @@ public class TimeTable {
         batches[9].createBatch("B10",new int[]{0, 1, 2, 3, 4},new int[]{4, 8, 13, 18, 23});
         batches[10].createBatch("B11",new int[]{0, 1, 2, 3, 4},new int[]{3, 7, 14, 17, 24});
         batches[11].createBatch("B12",new int[]{0, 1, 2, 3, 4},new int[]{2, 8, 9, 15, 20});
+        //set Batch 10 fixed lectures
         String javaB10= batches[9].course[0] + " [" + faculties[4].facultyName + "]"+ "{"+ classes[0].className+"}";
         batches[9].timetable[0][1]=javaB10;
         faculties[4].faculty_timetable[0][1]="B10";
@@ -109,20 +112,20 @@ public class TimeTable {
         Arrays.fill(skipFEE,0);
         Arrays.fill(batchCounter,0);
         for (int batchID = 0; batchID < 12; batchID++) {
-            assignLab(0,batchID,6);
-            assignLab(1,batchID,6);
-            assignLab(2,batchID,2);
-            assignFeeLab(batchID);
-            assignClass(batchID);//maths
-            assignLabClass(batchID);//DBMS
-            assignClassLab(batchID);//fee
-            displayBatchTimeTable(batchID);
+            assignLab(0,batchID,6); //DS lectures
+            assignLab(1,batchID,6); //JAVA lectures
+            assignLab(2,batchID,2); //DBMS Lab Lectures
+            assignFeeLab(batchID); //FEE lab lectures
+            assignClass(batchID);//Maths lectures
+            assignLabClass(batchID);//DBMS Class/Lab lectures
+            assignClassLab(batchID);//FEE lectures
+            displayBatchTimeTable(batchID);//display timetable
         }
-        displayTimeTAble();
+        displayTimeTAble();//display faculty and class timetable
     }
 
-    static int[] skipDBMS=new int[12];
-    static int[] skipFEE=new int[12];
+    static int[] skipDBMS=new int[12];//Stores column of assigned DBMS lab lectures
+    static int[] skipFEE=new int[12];//Stores column of assigned FEE lab lectures
     public static void main(String[] args) {
         run();
     }
@@ -140,12 +143,13 @@ public class TimeTable {
         int counter = 0; //count no of assigned lectures
         int[] yStored =new int[3]; //stores the column of assigned lectures
         Arrays.fill(yStored,401);
-        int yStoredCount=0;
+        int yStoredCount=0;//Just a counter
         do {
             if(counter==no_of_lectures) {
                 break;
             }
             int rem = (no_of_lectures - counter) / 2;
+            //Finds Empty Spaces
             for (int a = 0; a < 4; a+=2) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
                     if(batches[batchID].timetable[a][b].equals("    ")) {
@@ -171,6 +175,7 @@ public class TimeTable {
                     pos[i]=401;
                 }
             }
+            //Assign lectures
             for (int d = 0; d < rem; d++) {
                 int count=0;
                 for(int p:pos) {
