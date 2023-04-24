@@ -656,10 +656,9 @@ public class TimeTable {
         } else {
             System.out.println("overwritten");
         }
-        if (sub_count[0] != 72 || sub_count[1] != 72 || sub_count[2] != 60 || sub_count[3] != 72 || sub_count[4] != 60) {
+        boolean access=sub_count[0] == 72 && sub_count[1] == 72 && sub_count[2] == 60 && sub_count[3] == 72 && sub_count[4] == 60 && (336-sum12) == count_2 && count_2 == (336-sum13);
+        if (!access) {
             run();
         }
-
-
     }
 }
