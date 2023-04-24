@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Faculty extends TimeTable {
+public class Faculty {
     String facultyName;
     String[][] faculty_timetable=new String[5][6];
     Faculty(){

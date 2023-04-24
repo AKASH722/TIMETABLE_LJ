@@ -132,13 +132,13 @@ public class TimeTable {
             return;
         }
         int facID = batches[batchID].faculty[courseID];
-        int[] x = new int[12];
-        int[] y = new int[12];
+        int[] x = new int[12];//row
+        int[] y = new int[12];//column
         Arrays.fill(x, 401);
         int[] pos = new int[12];
         int labId=0;
-        int counter = 0;
-        int[] yStored =new int[3];
+        int counter = 0; //count no of assigned lectures
+        int[] yStored =new int[3]; //stores the column of assigned lectures
         Arrays.fill(yStored,401);
         int yStoredCount=0;
         do {
