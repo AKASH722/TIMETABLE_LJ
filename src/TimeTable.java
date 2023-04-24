@@ -205,9 +205,7 @@ public class TimeTable {
                 classes[labId].timetable[a+1][b] = batches[batchID].batchName;
                 batches[batchID].timetable[a + 1][b] = batches[batchID].course[courseID] + " [" + faculties[facID].facultyName + "]" + "{"+classes[labId].className+"}";
                 yStored[yStoredCount++]=b;
-                if(courseID==2) {
-                    skipDBMS[batchID]=b;
-                }
+                skipDBMS[batchID]=b;
             }
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
@@ -385,7 +383,6 @@ public class TimeTable {
     static void assignLabClass(int batchID) {
         int facID=batches[batchID].faculty[2];
         int[] yStored =new int[4];
-        yStored[0]=skipDBMS[batchID];
         Arrays.fill(yStored,401);
         int yStoredCount=1;
         int[] x=new int[30];
@@ -442,7 +439,7 @@ public class TimeTable {
                 int b = temp%10;
                 int a = temp/10;
                 pos[pos2]=401;
-                if(b==yStored[0] ||(b==yStored[1] && b==yStored[2]) ||(b==yStored[1] && b==yStored[3]) ||(b==yStored[2] && b==yStored[3])) {
+                if(b==skipDBMS[batchID] ||(b==yStored[1] && b==yStored[2]) ||(b==yStored[1] && b==yStored[3]) ||(b==yStored[2] && b==yStored[3])) {
                     continue;
                 }
                 faculties[facID].faculty_timetable[a][b] = batches[batchID].batchName;
@@ -467,7 +464,6 @@ public class TimeTable {
     static void assignClassLab(int batchID) {
         int facID=batches[batchID].faculty[4];
         int[] yStored =new int[4];
-        yStored[0]=skipFEE[batchID];
         Arrays.fill(yStored,401);
         int yStoredCount=1;
         int[] x=new int[30];
@@ -524,7 +520,7 @@ public class TimeTable {
                 int b = temp%10;
                 int a = temp/10;
                 pos[pos2]=401;
-                if(b==yStored[0] ||(b==yStored[1] && b==yStored[2]) ||(b==yStored[1] && b==yStored[3]) ||(b==yStored[2] && b==yStored[3])) {
+                if(b==skipFEE[batchID] ||(b==yStored[1] && b==yStored[2]) ||(b==yStored[1] && b==yStored[3]) ||(b==yStored[2] && b==yStored[3])) {
                     continue;
                 }
                 faculties[facID].faculty_timetable[a][b] = batches[batchID].batchName;
