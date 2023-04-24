@@ -101,10 +101,13 @@ public class TimeTable {
         faculties[4].faculty_timetable[1][5]="B10";
         classes[0].timetable[1][5] = batches[9].batchName;
     }
-    static int[] skipDBMS=new int[12];
-    static int[] skipFEE=new int[12];
-    public static void main(String[] args) {
+    static void run() {
         constraint();
+        count=0;
+        count_2=0;
+        Arrays.fill(skipDBMS,0);
+        Arrays.fill(skipFEE,0);
+        Arrays.fill(batchCounter,0);
         for (int batchID = 0; batchID < 12; batchID++) {
             assignLab(0,batchID,6);
             assignLab(1,batchID,6);
@@ -116,6 +119,12 @@ public class TimeTable {
             displayBatchTimeTable(batchID);
         }
         displayTimeTAble();
+    }
+
+    static int[] skipDBMS=new int[12];
+    static int[] skipFEE=new int[12];
+    public static void main(String[] args) {
+        run();
     }
     static void assignLab(int courseID , int batchID , int no_of_lectures) {
         if (courseID == 0 && batchID == 9) {
@@ -139,9 +148,9 @@ public class TimeTable {
             int rem = (no_of_lectures - counter) / 2;
             for (int a = 0; a < 4; a+=2) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if(batches[batchID].timetable[a][b]==null) {
-                        if(faculties[facID].faculty_timetable[a][b]==null) {
-                            if(classes[labId].timetable[a][b]==null) {
+                    if(batches[batchID].timetable[a][b].equals("    ")) {
+                        if(faculties[facID].faculty_timetable[a][b].equals("    ")) {
+                            if(classes[labId].timetable[a][b].equals("    ")) {
                                 for (int c = 0; c < x.length; c++) {
                                     if(x[c] == 401) {
                                         x[c] = a;
@@ -202,7 +211,7 @@ public class TimeTable {
             }
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if (batches[batchID].timetable[a][b] == null) {
+                    if (batches[batchID].timetable[a][b].equals("    ")) {
                         continue;
                     }
                     if (batches[batchID].timetable[a][b].equals(batches[batchID].course[courseID] + " [" + faculties[facID].facultyName + "]" + "{" + classes[labId].className + "}")) {
@@ -229,9 +238,9 @@ public class TimeTable {
             int rem = (2 - counter) / 2;
             for (int a = 0; a < 4; a+=2) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if(batches[batchID].timetable[a][b]==null) {
-                        if(faculties[facID].faculty_timetable[a][b]==null) {
-                            if(classes[labId].timetable[a][b]==null) {
+                    if(batches[batchID].timetable[a][b].equals("    ")) {
+                        if(faculties[facID].faculty_timetable[a][b].equals("    ")) {
+                            if(classes[labId].timetable[a][b].equals("    ")) {
                                 for (int c = 0; c < x.length; c++) {
                                     if(x[c] == 401) {
                                         x[c] = a;
@@ -280,7 +289,7 @@ public class TimeTable {
             }
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if (batches[batchID].timetable[a][b] == null) {
+                    if (batches[batchID].timetable[a][b] .equals("    ")) {
                         continue;
                     }
                     if (batches[batchID].timetable[a][b].equals(batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]" + "{" + classes[labId].className + "}")) {
@@ -310,9 +319,9 @@ public class TimeTable {
             int rem = (6 - counter);
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if(batches[batchID].timetable[a][b]==null) {
-                        if(faculties[facID].faculty_timetable[a][b]==null) {
-                            if(classes[classID].timetable[a][b]==null) {
+                    if(batches[batchID].timetable[a][b].equals("    ")) {
+                        if(faculties[facID].faculty_timetable[a][b].equals("    ")) {
+                            if(classes[classID].timetable[a][b].equals("    ")) {
                                 for (int c = 0; c < x.length; c++) {
                                     if(x[c] == 401) {
                                         x[c] = a;
@@ -361,7 +370,7 @@ public class TimeTable {
             }
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if (batches[batchID].timetable[a][b] == null) {
+                    if (batches[batchID].timetable[a][b] .equals("    ")) {
                         continue;
                     }
                     if (batches[batchID].timetable[a][b].equals(batches[batchID].course[3] + " [" + faculties[facID].facultyName + "]" + "{"+classes[classID].className+"}")) {
@@ -392,9 +401,9 @@ public class TimeTable {
             int rem = (3 - counter);
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if(batches[batchID].timetable[a][b]==null) {
-                        if(faculties[facID].faculty_timetable[a][b]==null) {
-                            if(classes[classID].timetable[a][b]==null) {
+                    if(batches[batchID].timetable[a][b].equals("    ")) {
+                        if(faculties[facID].faculty_timetable[a][b].equals("    ")) {
+                            if(classes[classID].timetable[a][b].equals("    ")) {
                                 for (int c = 0; c < x.length; c++) {
                                     if(x[c] == 401) {
                                         x[c] = a;
@@ -443,7 +452,7 @@ public class TimeTable {
             }
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if (batches[batchID].timetable[a][b] == null) {
+                    if (batches[batchID].timetable[a][b] .equals("    ")) {
                         continue;
                     }
                     if (batches[batchID].timetable[a][b].equals(batches[batchID].course[2] + " [" + faculties[facID].facultyName + "]" + "{"+classes[classID].className+"}")) {
@@ -474,9 +483,9 @@ public class TimeTable {
             int rem = (3 - counter);
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if(batches[batchID].timetable[a][b]==null) {
-                        if(faculties[facID].faculty_timetable[a][b]==null) {
-                            if(classes[classID].timetable[a][b]==null) {
+                    if(batches[batchID].timetable[a][b].equals("    ")) {
+                        if(faculties[facID].faculty_timetable[a][b].equals("    ")) {
+                            if(classes[classID].timetable[a][b].equals("    ")) {
                                 for (int c = 0; c < x.length; c++) {
                                     if(x[c] == 401) {
                                         x[c] = a;
@@ -525,7 +534,7 @@ public class TimeTable {
             }
             for (int a = 0; a < batches[batchID].timetable.length; a++) {
                 for (int b = 0; b < batches[batchID].timetable[a].length; b++) {
-                    if (batches[batchID].timetable[a][b] == null) {
+                    if (batches[batchID].timetable[a][b] .equals("    ")) {
                         continue;
                     }
                     if (batches[batchID].timetable[a][b].equals(batches[batchID].course[4] + " [" + faculties[facID].facultyName + "]" + "{"+classes[classID].className+"}")) {
@@ -543,7 +552,7 @@ public class TimeTable {
         int counter=0;
         for (int i = 0; i < batches[batchId].timetable.length; i++) {
             for(int j=0; j< batches[batchId].timetable[i].length;j++) {
-                if(batches[batchId].timetable[i][j]==null) {
+                if(batches[batchId].timetable[i][j].equals("    ")) {
                     batches[batchId].timetable[i][j]="     -------     ";
                     counter++;
                 }
@@ -578,12 +587,12 @@ public class TimeTable {
                 sc=4;
             }
             int count=0;
-            if(faculties[facId].facultyName == null) {
+            if(faculties[facId].facultyName .equals("    ")) {
                 continue;
             }
             for (int i = 0; i < faculties[facId].faculty_timetable.length; i++) {
                 for(int j=0; j<faculties[facId].faculty_timetable[i].length;j++) {
-                    if(faculties[facId].faculty_timetable[i][j]==null) {
+                    if(faculties[facId].faculty_timetable[i][j].equals("    ")) {
                         faculties[facId].faculty_timetable[i][j]="--";
                         count++;
                     }
@@ -598,7 +607,7 @@ public class TimeTable {
         for (Classes c : classes) {
             for (int i = 0; i < c.timetable.length; i++) {
                 for (int j = 0; j < c.timetable[i].length; j++) {
-                    if(c.timetable[i][j]==null) {
+                    if(c.timetable[i][j].equals("    ")) {
                         c.timetable[i][j]="--";
                     } else {
                         String s=c.timetable[i][j];
@@ -647,5 +656,10 @@ public class TimeTable {
         } else {
             System.out.println("overwritten");
         }
+        if (sub_count[0] != 72 || sub_count[1] != 72 || sub_count[2] != 60 || sub_count[3] != 72 || sub_count[4] != 60) {
+            run();
+        }
+
+
     }
 }

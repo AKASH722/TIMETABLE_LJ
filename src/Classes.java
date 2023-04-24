@@ -1,6 +1,13 @@
+import java.util.Arrays;
+
 public class Classes extends TimeTable {
     String className;
     String[][] timetable =new String[5][6];
+    Classes() {
+        for (String[] strings : timetable) {
+            Arrays.fill(strings,"    ");
+        }
+    }
     void setClassName(String className) {
         this.className = className;
     }
