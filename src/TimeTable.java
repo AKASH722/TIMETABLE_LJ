@@ -554,22 +554,17 @@ public class TimeTable {
                 }
             }
         }
-        batches[batchId].display();
         if(counter==2) {
             count++;
-            System.out.println("All fine");
         } else {
-            System.out.println("Not Fine "+(counter-2));
             count_2+=counter-2;
         }
-        System.out.println();
     }
     static int[] batchCounter=new int[12];
     static void displayTimeTAble () {
         int[] sub_count=new int[5];
         Arrays.fill(sub_count,0);
         int sc;
-        System.out.println("faculties\n");
         for (int facId = 0; facId < faculties.length; facId++) {
             if(facId<5) {
                 sc=0;
@@ -594,12 +589,8 @@ public class TimeTable {
                     }
                 }
             }
-            faculties[facId].display();
-            System.out.println(30-count);
             sub_count[sc]+=30-count;
-            System.out.println();
         }
-        System.out.println("class and labs \n");
         for (Classes c : classes) {
             for (int i = 0; i < c.timetable.length; i++) {
                 for (int j = 0; j < c.timetable[i].length; j++) {
@@ -616,45 +607,66 @@ public class TimeTable {
                     }
                 }
             }
-            c.display();
-            System.out.println();
         }
-        System.out.println("No of correct Batches  : "+count);
-        System.out.println("No of Missing lectures : "+count_2);
-        System.out.println();
-        System.out.println("Total no of assigned lectures");
-        System.out.println("DS   : "+sub_count[0]);
-        System.out.println("JAVA : "+sub_count[1]);
-        System.out.println("DBMS : "+sub_count[2]);
-        System.out.println("MATH : "+sub_count[3]);
-        System.out.println("FEE  : "+sub_count[4]);
-        System.out.println();
         double count2=0.0;
         for (int x:sub_count) {
             count2+=x;
         }
         count2*=100;
-        System.out.println();
         int sum12=0,sum13=0;
         for(int x:sub_count) {
             sum13+=x;
         }
         for(int x:batchCounter) {
-            System.out.println(x);
             sum12+=x;
-        }
-        System.out.println();
-        System.out.println(336-sum12);
-        System.out.println("Accuracy Of the TimeTable : "+((count2)/336.0)+"%");
-        System.out.println("Accuracy Of the TimeTable : "+((count*100)/12.0)+"%");
-        if((336-sum12) == count_2 && count_2 == (336-sum13)) {
-            System.out.println("No overwriting");
-        } else {
-            System.out.println("overwritten");
         }
         boolean access=sub_count[0] == 72 && sub_count[1] == 72 && sub_count[2] == 60 && sub_count[3] == 72 && sub_count[4] == 60 && (336-sum12) == count_2 && count_2 == (336-sum13);
         if (!access) {
             run();
+        } else {
+            System.out.println("No of correct Batches  : "+count);
+            System.out.println("No of Missing lectures : "+count_2);
+            System.out.println();
+            System.out.println("Total no of assigned lectures");
+            System.out.println("DS   : "+sub_count[0]);
+            System.out.println("JAVA : "+sub_count[1]);
+            System.out.println("DBMS : "+sub_count[2]);
+            System.out.println("MATH : "+sub_count[3]);
+            System.out.println("FEE  : "+sub_count[4]);
+            System.out.println();
+            for(int x:batchCounter) {
+                System.out.println(x);
+            }
+            System.out.println(336-sum12);
+            System.out.println("Accuracy Of the TimeTable : "+((count2)/336.0)+"%");
+            System.out.println("Accuracy Of the TimeTable : "+((count*100)/12.0)+"%");
+            System.out.println();
+            if((336-sum12) == count_2 && count_2 == (336-sum13)) {
+                System.out.println("No overwriting");
+            } else {
+                System.out.println("overwritten");
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            for(Batch batch:batches) {
+                batch.display();
+                System.out.println();
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            for(Faculty faculty:faculties) {
+                faculty.display();
+                System.out.println();
+            }
+            System.out.println();
+            System.out.println();
+            System.out.println();
+            for(Classes classes1:classes) {
+                classes1.display();
+                System.out.println();
+            }
         }
     }
 }
